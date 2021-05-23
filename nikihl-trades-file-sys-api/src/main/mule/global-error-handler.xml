@@ -8,16 +8,7 @@ http://www.mulesoft.org/schema/mule/ee/core http://www.mulesoft.org/schema/mule/
 		<on-error-propagate enableNotifications="true" logException="true" doc:name="On Error Propagate" doc:id="4d987f16-39a2-4b59-9eb1-b323eda8b837" type="ANY">
 			<ee:transform doc:name="Transform Message" doc:id="10a7344a-0c8f-4f5c-bcde-6bc2748ca602" >
 				<ee:message >
-					<ee:set-payload ><![CDATA[%dw 2.0
-output application/json
----
-{
-	message: "error ocoured.",
-	error:{
-		description: error.description,
-		errorType: error.errorType.asString
-	}
-}]]></ee:set-payload>
+					<ee:set-payload resource="dw/errorResponcePayload.dwl" />
 				</ee:message>
 			</ee:transform>
 		</on-error-propagate>

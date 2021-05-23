@@ -1,8 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<mule xmlns="http://www.mulesoft.org/schema/mule/core" xmlns:doc="http://www.mulesoft.org/schema/mule/documentation"
+<mule xmlns:file="http://www.mulesoft.org/schema/mule/file"
+	xmlns:apikit="http://www.mulesoft.org/schema/mule/mule-apikit"
+	xmlns:http="http://www.mulesoft.org/schema/mule/http"
+	xmlns="http://www.mulesoft.org/schema/mule/core" xmlns:doc="http://www.mulesoft.org/schema/mule/documentation"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd">
+	xsi:schemaLocation="
+http://www.mulesoft.org/schema/mule/file http://www.mulesoft.org/schema/mule/file/current/mule-file.xsd 
+http://www.mulesoft.org/schema/mule/mule-apikit http://www.mulesoft.org/schema/mule/mule-apikit/current/mule-apikit.xsd 
+http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/http/current/mule-http.xsd http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd">
+	 <http:listener-config name="nikihl-trades-file-sys-api-httpListenerConfig" basePath="nikihl-trades-file-sys-api">
+        <http:listener-connection host="0.0.0.0" port="8081" />
+    </http:listener-config>
+    <apikit:config name="nikihl-trades-file-sys-api-config" api="resource::aa31fbc3-a461-482f-81a0-49352d60b622:nikihl-trades-file-sys-api:1.0.0:raml:zip:nikihl-trades-file-sys-api.raml" outboundHeadersMapName="outboundHeaders" httpStatusVarName="httpStatus" />
+	<file:config name="File_Config" doc:name="File Config" doc:id="7b2948d5-ba45-40f4-8978-c56308423c92" />
 	<configuration-properties doc:name="Configuration properties" doc:id="288f2484-3997-40b0-91df-3fcfb14cb226" file="config/${env}.properties" />
 	<configuration doc:name="Configuration" doc:id="6debf30b-2516-4d93-b4d7-e2b980a40ec6" defaultErrorHandler-ref="global-error-handlerError_Handler" />
 </mule>
